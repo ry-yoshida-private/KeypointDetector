@@ -5,6 +5,8 @@ from typing import TYPE_CHECKING, Type
 
 if TYPE_CHECKING:
     from .type_alias import KPDetector
+    from .parameter import KPDetectionParameters
+    from .detectors import ShiTomashiParameters, HarrisParameters
 
 class KPDetectionMethod(Enum):
     """
@@ -181,3 +183,25 @@ class KPDetectionMethod(Enum):
             case KPDetectionMethod.HARRIS:
                 from .detectors import HarrisDetector
                 return HarrisDetector
+
+    @property
+    def parameter_class(self) -> Type[KPDetectionParameters | ShiTomashiParameters | HarrisParameters]:
+        """
+        Get the parameter class for the method.
+
+        Returns:
+        ----------
+        Type[KPDetectionParameters]:
+            The parameter class for the method.
+        """
+        match self:
+            case KPDetectionMethod.SHI_TOMASHI:
+                from .detectors import ShiTomashiParameters
+                parameter_class = ShiTomashiParameters
+            case KPDetectionMethod.HARRIS:
+                from .detectors import HarrisParameters
+                parameter_class = HarrisParameters
+            case _:
+                from .parameter import KPDetectionParameters
+                parameter_class = KPDetectionParameters
+        return parameter_class

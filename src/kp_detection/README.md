@@ -20,7 +20,8 @@ Unified interface for keypoint detection using various OpenCV-backed algorithms.
 
 ## Supported detectors
 
-Enum values (string labels) are shown in the **Method** column. Descriptor column reflects `KPDetectionMethod.has_descriptor` and binary/float support where applicable.
+Enum values (string labels) are shown in the **Method** column.  
+Descriptor column reflects `KPDetectionMethod.has_descriptor` and binary/float support where applicable.
 
 | Method | Type | Descriptor | Notes |
 | ------ | ---- | ---------- | ----- |
@@ -30,7 +31,7 @@ Enum values (string labels) are shown in the **Method** column. Descriptor colum
 | FAST | Corner | — | Features from accelerated segment test |
 | Harris | Corner | — | Use `HarrisParameters` + `build_detector()` |
 | ShiTomashi | Corner | — | goodFeaturesToTrack; use `ShiTomashiParameters` + `build_detector()` |
-| AKAZE | Feature | Binary / float | Accelerated KAZE; MLDB (binary) or float descriptor, per OpenCV descriptor mode |
+| AKAZE (MLDB) | Feature | Binary | Accelerated KAZE; `cv2.AKAZE_create()` default descriptor (MLDB) |
 | KAZE | Feature | Float | Nonlinear scale space; float descriptor only |
 | BRISK | Feature | Binary | Binary robust invariant scalable keypoints |
 | ORB | Feature | Binary | Oriented FAST and rotated BRIEF |

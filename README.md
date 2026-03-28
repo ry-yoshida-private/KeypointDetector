@@ -33,18 +33,15 @@ After installing the package, import it from any directory:
 ```python
 import cv2
 
-from kp_detection import (
-    KPDetectionParameters,
-    KPDetectionMethod,
-    KPDetectionResult,
-)
+from kp_detection import KPDetectionMethod, KPDetectionResult
 
 image = cv2.imread("image.png", cv2.IMREAD_GRAYSCALE)
 
-params = KPDetectionParameters(method=KPDetectionMethod.SIFT)
-detector = params.build_detector()
+method = KPDetectionMethod.SIFT
+params = method.parameter_class(method=method)
+detector = method.detector_class(params=params)
 result: KPDetectionResult = detector.detect(image)
 # Use result according to KPDetectionResult / ArrayKPDetectionResult (see package README).
 ```
 
-For Harris or Shi–Tomasi, use `HarrisParameters` or `ShiTomashiParameters` instead of the base `KPDetectionParameters`.
+`KPDetectionMethod` maps each variant to a parameter dataclass and a detector class via `parameter_class` and `detector_class` (see `method.py`). For Harris or Shi–Tomasi, `parameter_class` resolves to `HarrisParameters` or `ShiTomashiParameters` automatically when you pass the matching `method`.

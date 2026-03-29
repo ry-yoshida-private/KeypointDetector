@@ -27,3 +27,6 @@ Homepage = "https://github.com/ry-yoshida-private/KeypointDetector"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+kp_detection = ["py.typed"]
